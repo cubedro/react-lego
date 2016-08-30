@@ -28,6 +28,7 @@ export default class Html extends React.Component {
         __html: `window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}`
       }} />
       <div id="html" dangerouslySetInnerHTML={{ __html: app }} />
+      <div id="devTools"></div>
       {scripts.map((script, i) => <script src={script} key={ i } />)}
       </body>
       </html>

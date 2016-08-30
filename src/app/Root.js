@@ -12,8 +12,14 @@ debug('lego:Root');
 
 // exported to be used in tests
 export const history = isBrowser ? browserHistory : createMemoryHistory();
-const store = configureStore(window.__INITIAL_STATE__); // eslint-disable-line
+export const store = configureStore(window.__INITIAL_STATE__); // eslint-disable-line
 const reduxHistory = syncHistoryWithStore(history, store);
+
+const RootEnv = (process.env.NODE_ENV !== 'production')
+  ? require('./containers/DevTools/DevTools')
+  : () => (<span />);
+
+export const DevTools = () => (<Provider store={store} ><RootEnv /></Provider>);
 
 export default class Root extends React.Component {
   render() {
