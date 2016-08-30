@@ -6,6 +6,7 @@ export default function renderAppWrapper(assets) {
     try {
       res.send(res.renderPageToString(
         <Html
+          initialState={res.initialState}
           scripts={assets.javascript}
           stylesheets={assets.styles}
           content={res.routerContext}

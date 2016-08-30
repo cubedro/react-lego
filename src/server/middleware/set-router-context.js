@@ -5,6 +5,7 @@ import debug from 'debug';
 
 import configureStore from '../../app/store/configureStore';
 import { makeRoutes } from '../../app/routes';
+import fetchComponentData from '../lib/fetchComponentData';
 
 const setRouterContext = (req, res, next) => {
   const log = debug('lego:set-router-context');
@@ -24,15 +25,21 @@ const setRouterContext = (req, res, next) => {
     } else {
       // path * will return a 404
       const isNotFound = renderProps.routes.find((route) => route.path === '*');
-      const InitialComponent = (
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      );
-      res.initialState = store.getState(); // eslint-disable-line
-      res.status(isNotFound ? 404 : 200); // eslint-disable-line
-      res.routerContext = res.renderPageToString(InitialComponent); // eslint-disable-line
-      next();
+      const setContext = () => {
+        const InitialComponent = (
+          <Provider store={store}>
+            <RouterContext {...renderProps} />
+          </Provider>
+        );
+        res.initialState = store.getState(); // eslint-disable-line
+        res.status(isNotFound ? 404 : 200); // eslint-disable-line
+        res.routerContext = res.renderPageToString(InitialComponent); // eslint-disable-line
+        next();
+      };
+
+      fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
+        .then(setContext)
+        .catch((err) => res.render500(err));
     }
   });
 };

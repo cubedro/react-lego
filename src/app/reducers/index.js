@@ -15,11 +15,6 @@ function game(state = {}, action) {
     case actions.FETCH_PEOPLE_CARDS:
       return {
         ...state,
-        loading: true
-      };
-    case actions.FETCH_PEOPLE_CARDS_SUCCESS:
-      return {
-        ...state,
         cards: action.data,
         QandA: getQuestionAndAnswer({ cards: action.data, answerInt, factInt }),
         status: action.status

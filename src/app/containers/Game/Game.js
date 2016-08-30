@@ -13,6 +13,8 @@ const Dealing = () => <p>Loading cards....</p>;
 
 class Game extends React.Component {
 
+  static needs = [fetchPeopleCards];
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +30,7 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.cards) return;
     this.fetchCards();
   }
 
