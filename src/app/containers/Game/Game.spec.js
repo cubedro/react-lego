@@ -1,5 +1,5 @@
 import { expect, shallow, React } from '../../../../tests/support/test.helper';
-import Game from './Game';
+import { WrappedComponent as Game } from './Game';
 
 const baseProps = {};
 

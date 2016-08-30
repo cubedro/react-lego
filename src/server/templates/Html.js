@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { renderToString } from 'react-dom/server';
 import DocumentMeta from 'react-document-meta';
 import isEmpty from 'lodash/isEmpty';
 import { hasWindow } from '../../app/utils';
@@ -14,7 +13,7 @@ export default class Html extends React.Component {
 
   render() {
     const { initialState, scripts, stylesheets, content } = this.props;
-    const app = (isEmpty(content)) ? null : renderToString(content);
+    const app = (isEmpty(content)) ? null : content;
     return (
       <html lang="en">
       <head>
