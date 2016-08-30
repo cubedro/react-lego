@@ -5,6 +5,7 @@
     "add-module-exports",
     "transform-class-properties",
     "transform-object-rest-spread",
-    "transform-object-assign"
+    "transform-object-assign",
+    "react-hot-loader/babel"
   ]
 }

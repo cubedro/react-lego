@@ -18,11 +18,17 @@ routingApp.on('mount', (parent) => {
   ));
 });
 
+function getStaticAssets() {
+  return (process.env.NODE_ENV === 'development')
+    ? require('./middleware/hot-reload') // eslint-disable-line
+    : express.static(DIST, { maxAge: oneDay });
+}
+
 export function setRoutes(assets) {
   log('adding react routes');
 
   routingApp
-    .use('/', express.static(DIST, { maxAge: oneDay }))
+    .use(getStaticAssets())
     .use('/api', apiRouter)
     .use(slashes())
     .get('*', setRouterContext, renderApp(assets));

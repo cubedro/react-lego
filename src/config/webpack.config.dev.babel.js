@@ -11,6 +11,8 @@ export default {
   devtool: 'source-map',
   entry: {
     app: [
+      'react-hot-loader/patch',
+      'webpack-hot-middleware/client',
       `${SRC}/client-entry.js`
     ]
   },
@@ -20,6 +22,7 @@ export default {
     publicPath: '/'
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('[name].css'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
