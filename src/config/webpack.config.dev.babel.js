@@ -4,8 +4,9 @@
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import { plugin } from '../server/isomorphic.tools';
 import './environment';
-import { SRC, DIST } from './paths';
+import { SRC, DIST, ROOT } from './paths';
 
 export default {
   devtool: 'source-map',
@@ -19,7 +20,9 @@ export default {
     filename: '[name].js',
     publicPath: '/'
   },
+  context: ROOT,
   plugins: [
+    plugin(),
     new ExtractTextPlugin('[name].css'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
@@ -49,6 +52,11 @@ export default {
           'css?sourceMap',
           'postcss',
           'sass?sourceMap&outputStyle=expanded'].join('!'))
+      },
+      {
+        test: /\.svg$/,
+        include: [/src/],
+        loaders: ['svg-inline']
       }
     ]
   },

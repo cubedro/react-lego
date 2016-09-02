@@ -5,6 +5,7 @@ require("babel-polyfill");
 const jsdom = require('jsdom');
 const hook = require('node-hook').hook;
 hook('.scss', (source, filename) => 'console.log("' + filename + '");');
+hook('.svg', (source, filename) => 'console.log("' + filename + '");');
 // setup the simplest document possible
 const doc = jsdom.jsdom(`
 <!doctype html>
@@ -14,7 +15,7 @@ const doc = jsdom.jsdom(`
   </body>
 </html>`);
 
-// get the window object out of the document and set globals for mocha 
+// get the window object out of the document and set globals for mocha
 const win = doc.defaultView;
 global.document = doc;
 global.window = win;

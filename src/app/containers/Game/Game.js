@@ -6,6 +6,8 @@ import { getQuestionAndAnswer } from './getQuestionAndAnswer';
 import Question from '../../components/Question/Question';
 import Answer from '../../components/Answer/Answer';
 import api from '../../api';
+import chevron from './assets/chevron.svg';
+import Svg from '../../components/Svg/Svg';
 
 debug('lego:Game');
 
@@ -87,10 +89,10 @@ export default class Game extends React.Component {
     } = this.state;
 
     return (
-      <div id="game">
+      <div id="game" className="game">
         <banner className="header">
           <h1>Star Wars Trivia</h1>
-          <p>A simple game using <a href="http://www.swapi.com" target="_blank">SWAPI</a>.</p>
+          <p><Svg markup={chevron} />A simple game using <a href="http://www.swapi.com" target="_blank">SWAPI</a>.</p>
         </banner>
         <button onClick={() => this.deal()}>Deal 'People' cards!</button>
         {error && <Error />}

@@ -3,15 +3,10 @@ import { renderToString } from 'react-dom/server';
 import express from 'express';
 import debug from 'debug';
 import compression from 'compression';
+
 import Error500 from './templates/Error500';
 import { routingApp, setRoutes } from './router';
-import webpackConfig from '../config/webpack.config.dev.babel';
 
-const webpackEntries = Object.keys(webpackConfig.entry);
-const assets = {
-  javascript: webpackEntries.map(entry => `/${entry}.js`),
-  styles: webpackEntries.map(entry => `/${entry}.css`)
-};
 const server = express();
 const log = debug('lego:server.js');
 log('starting');
@@ -37,7 +32,9 @@ Object.assign(express.response, {
   }
 });
 
-setRoutes(assets);
 server.use('/', routingApp);
 
-export default server;
+export default (assets) => {
+  setRoutes(assets);
+  return server;
+};

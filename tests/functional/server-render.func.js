@@ -38,28 +38,28 @@ describe('Server', function () {
   });
 
   it('should render NotFound with 404 status when not found', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/route-that-doesnt-exist/')
       .expect(404, /Not found/)
       .end(done);
   });
 
   it.skip('should render the ErrorPage when a server route throws', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/broken-route/')
       .expect(500, /Man down!/)
       .end(done);
   });
 
   it('should render the ErrorPage when a react route throws', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/broken-client-route/')
       .expect(500, /Man down!/)
       .end(done);
   });
 
   it('Should render a html page', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/')
       .expect(200)
       .expect(/<!doctype html>/)
@@ -70,14 +70,14 @@ describe('Server', function () {
   });
 
   it.skip('Should gzip static assets', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/')
       .expect('content-encoding', 'gzip')
       .end(done);
   });
 
   it('should render react routes from `makeRoutes()`', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/tests/')
       .expect(200)
       // can't test complete match because of generated data-reactids
@@ -87,7 +87,7 @@ describe('Server', function () {
   });
 
   it('should support react route redirects', (done) => {
-    supertest(server)
+    supertest(server(assets))
       .get('/redirect/')
       .expect(302)
       .expect('location', '/tests/')

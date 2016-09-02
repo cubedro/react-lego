@@ -65,12 +65,15 @@
     "react-router": "^2.4.0",
     "sass-loader": "^3.1.1",
     "style-loader": "^0.13.0",
+    "svg-inline-loader": "^0.6.1",
     "webpack": "^1.13.1",
+    "webpack-isomorphic-tools": "^2.5.8",
     "yargs": "^4.7.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-enzyme": "^0.4.2",
+    "chance": "^1.0.4",
     "chromedriver": "2.21.2",
     "enzyme": "^2.3.0",
     "eslint": "^2.9.0",

@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import PurifyCssPlugin from 'purifycss-loader/PurifyCssPlugin';
 import cssnano from 'cssnano';
+import { plugin } from '../server/isomorphic.tools';
 import './environment';
 import { SRC, DIST } from './paths';
 
@@ -20,6 +21,7 @@ export default {
     publicPath: '/'
   },
   plugins: [
+    plugin(),
     new ExtractTextPlugin('[name].css'),
     new PurifyCssPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -54,6 +56,11 @@ export default {
           'css',
           'sass?outputStyle=compact'].join('!'))
       },
+      {
+        test: /\.svg$/,
+        include: [/src/],
+        loaders: ['svg-inline']
+      }
     ]
   },
   postcss: [

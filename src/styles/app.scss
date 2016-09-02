@@ -43,3 +43,10 @@ h1 {
 .hidden{
   display:none!important;
 }
+
+.icon--chevron {
+  height: 12px;
+  width: 12px;
+  stroke: currentColor;
+  transform: rotate(270deg);
+}

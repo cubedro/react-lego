@@ -8,6 +8,8 @@ require('babel-core/register')({
 require("babel-polyfill");
 const hook = require('node-hook').hook;
 hook('.scss', (source, filename) => `console.log("${filename}");`);
+hook('.svg', (source, filename) => `console.log("${filename}");`);
+
 
 module.exports = (function(settings) {
   var buildString = "";
